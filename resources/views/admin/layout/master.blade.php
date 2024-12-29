@@ -50,9 +50,39 @@
         @yield('main_content')
     </div>
 </div>
-
 <script src="{{ asset('dist/js/scripts.js')}}"></script>
 <script src="{{ asset('dist/js/custom.js')}}"></script>
+
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)   
+        <script>
+            iziToast.show({
+                color: 'red',
+                message:'{{ $error }}',
+                position:'topRight'
+            })
+        </script>
+    @endforeach    
+    @endif
+    @if (session('success'))  
+        <script>
+            iziToast.show({
+                color: 'green',
+                message:"{{ session('success') }}",
+                position:'topRight'
+            })
+        </script>      
+    @endif
+
+    @if(session('error'))
+    <script>
+        iziToast.show({
+            color: 'red',
+            message:"{{ session('error') }}",
+            position:'topRight'
+        })
+    </script>  
+    @endif
 
 </body>
 </html>

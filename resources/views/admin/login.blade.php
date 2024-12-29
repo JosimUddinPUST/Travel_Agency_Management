@@ -10,12 +10,14 @@
                         <h4 class="text-center">Admin Panel Login</h4>
                     </div>
                     <div class="card-body card-body-auth">
-                        <form method="POST" action="index.html">
+                       
+                        <form method="POST" action="{{ route('admin_login_submit') }}">
+                            @csrf
                             <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Email Address" value="" autofocus>
+                                <input type="email" class="form-control" name="email" placeholder="Email Address" value="" autofocus autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" name="password"  placeholder="Password">
+                                <input type="password" class="form-control" name="password"  placeholder="Password" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-lg w_100_p">
@@ -24,7 +26,7 @@
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <a href="forget-password.html">
+                                    <a href="{{ route('admin_forget_password') }}">
                                         Forget Password?
                                     </a>
                                 </div>

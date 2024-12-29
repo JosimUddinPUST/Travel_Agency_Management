@@ -19,7 +19,7 @@ class Admin
     {
         
         if(!Auth::guard('admin')->check()){
-            return redirect()->route('admin_login')->with('You are not authorized as admin');
+            return redirect()->route('admin_login')->with('error','You are not authorized as admin');
         }
         return $next($request);
     }
