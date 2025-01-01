@@ -71,6 +71,11 @@ table.t1 tr td {
     width: 100%;
     height: 200px;
 }
+.iframe1{
+    width: 100%;
+    height: 200px;
+    border: none;
+}
 
 .bdb1 {border-bottom: 1px solid #d3d3d3;}
 

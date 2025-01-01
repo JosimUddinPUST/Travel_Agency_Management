@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminSliderController;
+use App\Http\Controllers\Admin\AdminWelcomeItemController;
 
 
 Route::get('/',[FrontController::class,'home'])->name('home');
@@ -65,6 +66,9 @@ Route::middleware('admin')->prefix('admin')->group(function (){
 
     Route::get('/slider/delete/{id}',[AdminSliderController::class, 'delete'])->name('admin_slider_delete');
     
+    //Welcome Item
+    Route::get('/welcome-item/edit',[AdminWelcomeItemController::class,'edit'])->name('admin_welcome_item_edit');
+    Route::post('/welcome-item/edit',[AdminWelcomeItemController::class,'edit_submit'])->name('admin_welcome_item_edit_submit');
 
 });
 //Admin

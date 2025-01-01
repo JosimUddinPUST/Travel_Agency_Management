@@ -19,7 +19,7 @@
                         <div class="card">
                             <div class="card-body">
                                 
-                                <form action="{{ route('admin_slider_create_submit',$slider->id) }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('admin_slider_edit_submit',$slider->id) }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label">Exsiting Photo</label>

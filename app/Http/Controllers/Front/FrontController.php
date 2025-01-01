@@ -4,20 +4,27 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Mail\Websitemail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Slider;
+use App\Models\WelcomeItem;
 use Hash;
 
 
 class FrontController extends Controller
 {
     public function home(){
-        return view("front.home");
+
+        $sliders= Slider::get();
+        $welcome_item= WelcomeItem::where('id',1)->first();
+        return view("front.home",compact('sliders','welcome_item'));
     }
     public function about(){
-        return view("front.about");
+        $welcome_item= WelcomeItem::where('id',1)->first();
+
+        return view("front.about",compact('welcome_item'));
     }
     public function blog(){
         return view("front.blog");

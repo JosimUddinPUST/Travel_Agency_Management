@@ -57,15 +57,23 @@ class AdminSliderController extends Controller
                 "photo"=> ["required",'image','mimes:jpeg,jpg,png,gif'],
             ]);
             $final_name='slider_'.time().'.'.$request->photo->extension();
+            if(file_exists(public_path('uploads/'.$slider->photo))){
+                unlink(public_path('uploads/'.$slider->photo));
+            }
+
             $request->photo->move(public_path('uploads'), $final_name);
             $slider->photo = $final_name;
-            unlink(public_path('uploads/'.$slider->photo));
         }
         $slider->save();
         return view('admin.slider.edit');
     }
 
     public function delete($id){
-        
+        $slider= Slider::where('id',$id)->first();
+        if(file_exists(public_path('uploads/'.$slider->photo))){
+            unlink(public_path('uploads/'.$slider->photo));
+        }
+        $slider->delete();
+        return redirect()->route('admin_slider_index')->with('success','Slider Deleted Successfully.');
     }
 }
