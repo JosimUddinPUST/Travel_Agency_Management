@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Mail\Websitemail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use Hash;
-use Auth;
 
 
 class FrontController extends Controller
@@ -59,7 +60,7 @@ class FrontController extends Controller
         $subject = "User Account Verification";
         $message = 'Please click the following link to verify your email address: <br><a href="'.$verification_link.'">Verify Email</a>';
 
-        \Mail::to($request->email)->send(new Websitemail($subject, $message));
+        Mail::to($request->email)->send(new Websitemail($subject, $message));
 
         return redirect()->route('user_login')->with("success","Registration Successful. Now, check your email to verify and login.");
     }
@@ -121,7 +122,7 @@ class FrontController extends Controller
         $subject= 'Reset User Password';
         $message= 'Plz click the following link to reset your password.<br><a href="'.$reset_link.'">Click Here</a>';
 
-        \Mail::to($user->email)->send(new Websitemail( $subject, $message));
+        Mail::to($user->email)->send(new Websitemail( $subject, $message));
         // return redirect()->route('user_login')->with('success','Password reset successfully, plz login with new password.');
         return redirect()->route('user_login')->with('success','We have sent a password reset link to reset password.');
     }

@@ -36,9 +36,8 @@
                                                 <td>{{ $slider->heading }}</td>
                                                 <td><img src="{{ asset('uploads/'.$slider->photo)}}" class="w_200"></td>
                                                 <td class="pt_10 pb_10">
-                                                    <a href="{{ route('admin_slider_index') }}" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal_1"><i class="fas fa-eye"></i></a>
-                                                    {{-- <a href="{{ route('admin_slider_edit') }}" class="btn btn-primary"><i class="fas fa-edit"></i></a> --}}
-                                                    <a href="{{ route('admin_slider_delete') }}" class="btn btn-danger" onClick="return confirm('Are you sure?');"><i class="fas fa-trash"></i></a>
+                                                    <a href="{{ route('admin_slider_edit',$slider->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                                    <a href="{{ route('admin_slider_delete',$slider->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             @endforeach

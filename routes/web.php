@@ -59,6 +59,13 @@ Route::middleware('admin')->prefix('admin')->group(function (){
 
     Route::get('/slider/delete',[AdminSliderController::class,'delete'])->name('admin_slider_delete');
 
+    Route::get('/slider/edit/{id}',[AdminSliderController::class, 'edit'])->name('admin_slider_edit');
+
+    Route::post('/slider/edit/{id}',[AdminSliderController::class,'edit_submit'])->name('admin_slider_edit_submit');
+
+    Route::get('/slider/delete/{id}',[AdminSliderController::class, 'delete'])->name('admin_slider_delete');
+    
+
 });
 //Admin
 Route::prefix('admin')->group(function (){

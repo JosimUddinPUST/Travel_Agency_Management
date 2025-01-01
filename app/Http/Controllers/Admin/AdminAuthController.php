@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
-use Hash;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use App\Mail\Websitemail;
+use Illuminate\Support\Facades\Mail;
 
 class AdminAuthController extends Controller
 {
@@ -60,7 +61,7 @@ class AdminAuthController extends Controller
         $message= "To reset your password, please click on the link below:<br>";
         $message.= "<a href='" . $reset_link ."'>Click Here</a>";
         
-        \Mail::to($request->email)->send(new Websitemail($subject,$message));
+        Mail::to($request->email)->send(new Websitemail($subject,$message));
 
         return redirect()->back()->with('success', 'We have sent a password reset link to your email. Please click the link to reset.');
     }
