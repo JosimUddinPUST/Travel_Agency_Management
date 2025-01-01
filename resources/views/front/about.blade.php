@@ -71,26 +71,29 @@
     </div>
 </div>
 
+@if($counter_item->status=="Show")
 <div class="counter-section pt_70 pb_70">
     <div class="container">
         <div class="row counter-items">
             <div class="col-md-3 counter-item">
-                <div class="counter">40</div>
-                <div class="text">Destinations</div>
+                <div class="counter">{{$counter_item->item1_number}}</div>
+                <div class="text">{{$counter_item->item1_title}}</div>
             </div>
             <div class="col-md-3 counter-item">
-                <div class="counter">1200</div>
-                <div class="text">Clients</div>
+                <div class="counter">{{$counter_item->item2_number}}</div>
+                <div class="text">{{$counter_item->item2_title}}</div>
             </div>
             <div class="col-md-3 counter-item">
-                <div class="counter">130</div>
-                <div class="text">Packages</div>
+                <div class="counter">{{$counter_item->item3_number}}</div>
+                <div class="text">{{$counter_item->item3_title}}</div>
             </div>
             <div class="col-md-3 counter-item">
-                <div class="counter">60</div>
-                <div class="text">Feedbacks</div>
+                <div class="counter">{{$counter_item->item4_number}}</div>
+                <div class="text">{{$counter_item->item4_title}}</div>
             </div>
         </div>
     </div>
 </div>
+@endif
+
 @endsection

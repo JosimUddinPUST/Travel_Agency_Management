@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\Slider;
 use App\Models\WelcomeItem;
 use App\Models\Feature;
+use App\Models\CounterItem;
+use App\Models\Testimonial;
 use Hash;
 
 
@@ -21,14 +23,16 @@ class FrontController extends Controller
         $sliders= Slider::get();
         $welcome_item= WelcomeItem::where('id',1)->first();
         $features=Feature::get();
+        $testimonials=Testimonial::get();
 
-        return view("front.home",compact('sliders','welcome_item','features'));
+        return view("front.home",compact('sliders','welcome_item','features','testimonials'));
     }
     public function about(){
         $welcome_item= WelcomeItem::where('id',1)->first();
         $features=Feature::get();
+        $counter_item=CounterItem::where('id',1)->first();
 
-        return view("front.about",compact('welcome_item','features'));
+        return view("front.about",compact('welcome_item','features','counter_item'));
     }
     public function blog(){
         return view("front.blog");
