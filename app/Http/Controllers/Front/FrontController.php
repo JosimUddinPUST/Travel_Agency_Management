@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Slider;
 use App\Models\WelcomeItem;
+use App\Models\Feature;
 use Hash;
 
 
@@ -19,12 +20,15 @@ class FrontController extends Controller
 
         $sliders= Slider::get();
         $welcome_item= WelcomeItem::where('id',1)->first();
-        return view("front.home",compact('sliders','welcome_item'));
+        $features=Feature::get();
+
+        return view("front.home",compact('sliders','welcome_item','features'));
     }
     public function about(){
         $welcome_item= WelcomeItem::where('id',1)->first();
+        $features=Feature::get();
 
-        return view("front.about",compact('welcome_item'));
+        return view("front.about",compact('welcome_item','features'));
     }
     public function blog(){
         return view("front.blog");

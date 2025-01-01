@@ -6,6 +6,7 @@ use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminSliderController;
 use App\Http\Controllers\Admin\AdminWelcomeItemController;
+use App\Http\Controllers\Admin\AdminFeatureController;
 
 
 Route::get('/',[FrontController::class,'home'])->name('home');
@@ -57,18 +58,22 @@ Route::middleware('admin')->prefix('admin')->group(function (){
     Route::get('/slider/index',[AdminSliderController::class,'index'])->name('admin_slider_index');
     Route::get('/slider/create',[AdminSliderController::class,'create'])->name('admin_slider_create');
     Route::post('/slider/create',[AdminSliderController::class,'create_submit'])->name('admin_slider_create_submit');
-
     Route::get('/slider/delete',[AdminSliderController::class,'delete'])->name('admin_slider_delete');
-
     Route::get('/slider/edit/{id}',[AdminSliderController::class, 'edit'])->name('admin_slider_edit');
-
     Route::post('/slider/edit/{id}',[AdminSliderController::class,'edit_submit'])->name('admin_slider_edit_submit');
-
     Route::get('/slider/delete/{id}',[AdminSliderController::class, 'delete'])->name('admin_slider_delete');
     
     //Welcome Item
     Route::get('/welcome-item/edit',[AdminWelcomeItemController::class,'edit'])->name('admin_welcome_item_edit');
     Route::post('/welcome-item/edit',[AdminWelcomeItemController::class,'edit_submit'])->name('admin_welcome_item_edit_submit');
+
+    //Feature
+    Route::get('/feature/index',[AdminFeatureController::class,'index'])->name('admin_feature_index');
+    Route::get('/feature/create',[AdminFeatureController::class,'create'])->name('admin_feature_create');
+    Route::post('/feature/create',[AdminFeatureController::class,'create_submit'])->name('admin_feature_create_submit');
+    Route::get('/feature/edit/{id}',[AdminFeatureController::class, 'edit'])->name('admin_feature_edit');
+    Route::post('/feature/edit/{id}',[AdminFeatureController::class,'edit_submit'])->name('admin_feature_edit_submit');
+    Route::get('/feature/delete/{id}',[AdminFeatureController::class, 'delete'])->name('admin_feature_delete');
 
 });
 //Admin
