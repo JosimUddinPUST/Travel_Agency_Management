@@ -10,6 +10,10 @@ use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminCounterItemController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\Admin\AdminTeamMemberController;
+use App\Http\Controllers\Admin\AdminFaqController;
+use App\Http\Controllers\Admin\AdminBlogCategoryController;
+use App\Http\Controllers\Admin\AdminPostController;
+
 
 
 Route::get('/',[FrontController::class,'home'])->name('home');
@@ -23,24 +27,28 @@ Route::get('/team-member-details/{id}',[FrontController::class,'team_member_deta
 Route::get('/destinations',[FrontController::class,'destinations'])->name('destinations');
 Route::get('/packages',[FrontController::class,'packages'])->name('packages');
 
+Route::get('/post-details/{slug}',[FrontController::class,'post_details'])->name('post_details');
+
+Route::get('/blog-category/{slug}',[FrontController::class,'blog_category'])->name('blog_category');
+
 Route::prefix('user')->group(function () {
-Route::get('/registration',[FrontController::class,'registration'])->name('user_registration');
-Route::post('/registration',[FrontController::class,'registration_submit'])->name('user_registration_submit');
-Route::get('/registration-verify-email/{email}/{token}',[FrontController::class,'registration_verify_email'])->name('user_registration_verify_email');
+    Route::get('/registration',[FrontController::class,'registration'])->name('user_registration');
+    Route::post('/registration',[FrontController::class,'registration_submit'])->name('user_registration_submit');
+    Route::get('/registration-verify-email/{email}/{token}',[FrontController::class,'registration_verify_email'])->name('user_registration_verify_email');
 
-Route::get('/login',[FrontController::class,'login'])->name('user_login');
-Route::post('/login',[FrontController::class,'login_submit'])->name('user_login_submit');
-Route::get('/logout',[FrontController::class,'logout'])->name('user_logout');
+    Route::get('/login',[FrontController::class,'login'])->name('user_login');
+    Route::post('/login',[FrontController::class,'login_submit'])->name('user_login_submit');
+    Route::get('/logout',[FrontController::class,'logout'])->name('user_logout');
 
 
-Route::get('/forget-password',[FrontController::class,'forget_password'])->name('user_forget_password');
-Route::post('/forget-password',[FrontController::class,'forget_password_submit'])->name('user_forget_password_submit');
+    Route::get('/forget-password',[FrontController::class,'forget_password'])->name('user_forget_password');
+    Route::post('/forget-password',[FrontController::class,'forget_password_submit'])->name('user_forget_password_submit');
 
-Route::get('/reset-password/{email}/{token}',[FrontController::class,'reset_password'])->name('user_reset_password');
-Route::post('/reset-password/{email}/{token}',[FrontController::class,'reset_password_submit'])->name('user_reset_password_submit');
+    Route::get('/reset-password/{email}/{token}',[FrontController::class,'reset_password'])->name('user_reset_password');
+    Route::post('/reset-password/{email}/{token}',[FrontController::class,'reset_password_submit'])->name('user_reset_password_submit');
 
-Route::get('/profile',[UserController::class,'profile'])->name('user_profile');
-Route::post('/profile',[UserController::class,'profile_submit'])->name('user_profile_submit');
+    Route::get('/profile',[UserController::class,'profile'])->name('user_profile');
+    Route::post('/profile',[UserController::class,'profile_submit'])->name('user_profile_submit');
 
 
 });
@@ -72,6 +80,14 @@ Route::middleware('admin')->prefix('admin')->group(function (){
     Route::get('/welcome-item/edit',[AdminWelcomeItemController::class,'edit'])->name('admin_welcome_item_edit');
     Route::post('/welcome-item/edit',[AdminWelcomeItemController::class,'edit_submit'])->name('admin_welcome_item_edit_submit');
 
+    //Feature
+    Route::get('/feature/index',[AdminFeatureController::class,'index'])->name('admin_feature_index');
+    Route::get('/feature/create',[AdminFeatureController::class,'create'])->name('admin_feature_create');
+    Route::post('/feature/create',[AdminFeatureController::class,'create_submit'])->name('admin_feature_create_submit');
+    Route::get('/feature/edit/{id}',[AdminFeatureController::class, 'edit'])->name('admin_feature_edit');
+    Route::post('/feature/edit/{id}',[AdminFeatureController::class,'edit_submit'])->name('admin_feature_edit_submit');
+    Route::get('/feature/delete/{id}',[AdminFeatureController::class, 'delete'])->name('admin_feature_delete');
+
     //Counter Item
     Route::get('/counter-item/edit',[AdminCounterItemController::class,'edit'])->name('admin_counter_item_edit');
     Route::post('/counter-item/edit',[AdminCounterItemController::class,'edit_submit'])->name('admin_counter_item_edit_submit');
@@ -92,13 +108,32 @@ Route::middleware('admin')->prefix('admin')->group(function (){
     Route::post('/team-member/edit/{id}',[AdminTeamMemberController::class,'edit_submit'])->name('admin_team_member_edit_submit');
     Route::get('/team-member/delete/{id}',[AdminTeamMemberController::class, 'delete'])->name('admin_team_member_delete');
 
-    //Feature
-    Route::get('/feature/index',[AdminFeatureController::class,'index'])->name('admin_feature_index');
-    Route::get('/feature/create',[AdminFeatureController::class,'create'])->name('admin_feature_create');
-    Route::post('/feature/create',[AdminFeatureController::class,'create_submit'])->name('admin_feature_create_submit');
-    Route::get('/feature/edit/{id}',[AdminFeatureController::class, 'edit'])->name('admin_feature_edit');
-    Route::post('/feature/edit/{id}',[AdminFeatureController::class,'edit_submit'])->name('admin_feature_edit_submit');
-    Route::get('/feature/delete/{id}',[AdminFeatureController::class, 'delete'])->name('admin_feature_delete');
+    //Faq
+    Route::get('/faq/index',[AdminFaqController::class,'index'])->name('admin_faq_index');
+    Route::get('/faq/create',[AdminFaqController::class,'create'])->name('admin_faq_create');
+    Route::post('/faq/create',[AdminFaqController::class,'create_submit'])->name('admin_faq_create_submit');
+    Route::get('/faq/edit/{id}',[AdminFaqController::class, 'edit'])->name('admin_faq_edit');
+    Route::post('/faq/edit/{id}',[AdminFaqController::class,'edit_submit'])->name('admin_faq_edit_submit');
+    Route::get('/faq/delete/{id}',[AdminFaqController::class, 'delete'])->name('admin_faq_delete');
+
+    //Blog Category
+    Route::get('/blog-category/index',[AdminBlogCategoryController::class,'index'])->name('admin_blog_category_index');
+    Route::get('/blog-category/create',[AdminBlogCategoryController::class,'create'])->name('admin_blog_category_create');
+    Route::post('/blog-category/create',[AdminBlogCategoryController::class,'create_submit'])->name('admin_blog_category_create_submit');
+    Route::get('/blog-category/edit/{id}',[AdminBlogCategoryController::class, 'edit'])->name('admin_blog_category_edit');
+    Route::post('/blog-category/edit/{id}',[AdminBlogCategoryController::class,'edit_submit'])->name('admin_blog_category_edit_submit');
+    Route::get('/blog-category/delete/{id}',[AdminBlogCategoryController::class, 'delete'])->name('admin_blog_category_delete');
+
+    //Post
+    Route::get('/post/index',[AdminPostController::class,'index'])->name('admin_post_index');
+    Route::get('/post/create',[AdminPostController::class,'create'])->name('admin_post_create');
+    Route::post('/post/create',[AdminPostController::class,'create_submit'])->name('admin_post_create_submit');
+    Route::get('/post/edit/{id}',[AdminPostController::class, 'edit'])->name('admin_post_edit');
+    Route::post('/post/edit/{id}',[AdminPostController::class,'edit_submit'])->name('admin_post_edit_submit');
+    Route::get('/post/delete/{id}',[AdminPostController::class, 'delete'])->name('admin_post_delete');
+
+    
+
 
 });
 //Admin

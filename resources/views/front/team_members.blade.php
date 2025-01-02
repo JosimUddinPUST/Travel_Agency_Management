@@ -51,4 +51,11 @@
         </div>
     </div>
 </div>
+<div class="container pb_10">
+    <div class="row">
+        <div class="col-md-12 text-center d-flex justify-content-center">
+            {{$team_members->links()}}
+        </div>
+    </div>
+</div>
 @endsection

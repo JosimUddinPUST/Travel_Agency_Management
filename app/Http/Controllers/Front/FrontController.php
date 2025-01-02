@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front;
 
+
+use Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\Websitemail;
@@ -14,7 +16,9 @@ use App\Models\Feature;
 use App\Models\CounterItem;
 use App\Models\Testimonial;
 use App\Models\TeamMember;
-use Hash;
+use App\Models\Faq;
+use App\Models\BlogCategory;
+use App\Models\Post;
 
 
 class FrontController extends Controller
@@ -35,17 +39,35 @@ class FrontController extends Controller
         return view("front.about",compact('welcome_item','features','counter_item'));
     }
     public function blog(){
-        return view("front.blog");
+        $posts=Post::with('blog_category')->paginate(3);
+        return view("front.blog",compact('posts'));
     }
+    
+    public function post_details($slug){
+        $post=Post::where('slug',$slug)->with('blog_category')->first();
+        
+        $categories = BlogCategory::orderBy('id','desc')->get();
+
+        $latest_posts=Post::where('id','!=',$post->id)->with('blog_category')->orderBy('id','desc')->get()->take(5);
+        return view("front.post_details",compact('post','categories','latest_posts'));
+    }
+
+    public function blog_category($slug){
+        $category=BlogCategory::where('slug',$slug)->first();
+        $posts=Post::where('blog_category_id',$category->id)->with('blog_category')->paginate(3);
+        return view("front.blog_category",compact('category','posts'));
+    }
+
     public function contact(){
         return view("front.contact");
     }
     public function faq(){
-        return view("front.faq");
+        $faqs=Faq::get();
+        return view("front.faq",compact('faqs'));
     }
     public function team_members(){
 
-        $team_members=TeamMember::get();
+        $team_members=TeamMember::paginate(4);
 
         return view("front.team_members",compact('team_members'));
     }
@@ -145,8 +167,7 @@ class FrontController extends Controller
         $subject= 'Reset User Password';
         $message= 'Plz click the following link to reset your password.<br><a href="'.$reset_link.'">Click Here</a>';
 
-        Mail::to($user->email)->send(new Websitemail( $subject, $message));
-        // return redirect()->route('user_login')->with('success','Password reset successfully, plz login with new password.');
+        Mail::to($user->email)->send(new Websitemail( $subject, $message)); 
         return redirect()->route('user_login')->with('success','We have sent a password reset link to reset password.');
     }
     public function reset_password($email, $token){
