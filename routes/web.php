@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminWelcomeItemController;
 use App\Http\Controllers\Admin\AdminFeatureController;
 use App\Http\Controllers\Admin\AdminCounterItemController;
 use App\Http\Controllers\Admin\AdminTestimonialController;
+use App\Http\Controllers\Admin\AdminTeamMemberController;
 
 
 Route::get('/',[FrontController::class,'home'])->name('home');
@@ -17,6 +18,8 @@ Route::get('/blog',[FrontController::class,'blog'])->name('blog');
 Route::get('/contact',[FrontController::class,'contact'])->name('contact');
 Route::get('/faq',[FrontController::class,'faq'])->name('faq');
 Route::get('/team-members',[FrontController::class,'team_members'])->name('team_members');
+Route::get('/team-member-details/{id}',[FrontController::class,'team_member_details'])->name('team_member_details');
+
 Route::get('/destinations',[FrontController::class,'destinations'])->name('destinations');
 Route::get('/packages',[FrontController::class,'packages'])->name('packages');
 
@@ -81,7 +84,13 @@ Route::middleware('admin')->prefix('admin')->group(function (){
     Route::post('/testimonial/edit/{id}',[AdminTestimonialController::class,'edit_submit'])->name('admin_testimonial_edit_submit');
     Route::get('/testimonial/delete/{id}',[AdminTestimonialController::class, 'delete'])->name('admin_testimonial_delete');
 
-
+    //Team Member
+    Route::get('/team-member/index',[AdminTeamMemberController::class,'index'])->name('admin_team_member_index');
+    Route::get('/team-member/create',[AdminTeamMemberController::class,'create'])->name('admin_team_member_create');
+    Route::post('/team-member/create',[AdminTeamMemberController::class,'create_submit'])->name('admin_team_member_create_submit');
+    Route::get('/team-member/edit/{id}',[AdminTeamMemberController::class, 'edit'])->name('admin_team_member_edit');
+    Route::post('/team-member/edit/{id}',[AdminTeamMemberController::class,'edit_submit'])->name('admin_team_member_edit_submit');
+    Route::get('/team-member/delete/{id}',[AdminTeamMemberController::class, 'delete'])->name('admin_team_member_delete');
 
     //Feature
     Route::get('/feature/index',[AdminFeatureController::class,'index'])->name('admin_feature_index');

@@ -19,160 +19,36 @@
 <div class="team pt_70">
     <div class="container">
         <div class="row">
+            @foreach($team_members as $team_member)
             <div class="col-lg-3 col-md-6">
                 <div class="item pb_50">
                     <div class="photo">
-                        <img src="uploads/team-1.jpg" alt="" />
+                        <img src="{{ asset('uploads/' . $team_member->photo) }}" alt="No Image" />
                     </div>
                     <div class="text">
-                        <h2><a href="team-member.html">Pat Flynn</a></h2>
-                        <div class="designation">Founder</div>
+                        <h2><a href="{{route('team_member_details',$team_member->id)}}">{{$team_member->name}}</a></h2>
+                        <div class="designation">{{$team_member->designation}}</div>
                         <div class="social">
                             <ul>
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                                @if($team_member->facebook)
+                                <li><a href="{{$team_member->facebook}}"><i class="fab fa-facebook-f"></i></a></li>
+                                @endif
+                                @if($team_member->twitter)
+                                <li><a href="{{$team_member->twitter}}"><i class="fab fa-twitter"></i></a></li>
+                                @endif
+                                @if($team_member->linkedin)
+                                <li><a href="{{$team_member->linkedin}}"><i class="fab fa-linkedin-in"></i></a></li>
+                                @endif
+                                @if($team_member->instagram)
+                                <li><a href="{{$team_member->instagram}}"><i class="fab fa-instagram"></i></a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_50">
-                    <div class="photo">
-                        <img src="uploads/team-2.jpg" alt="" />
-                    </div>
-                    <div class="text">
-                        <h2><a href="team-member.html">David Beckham</a></h2>
-                        <div class="designation">Co-Founder</div>
-                        <div class="social">
-                            <ul>
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_50">
-                    <div class="photo">
-                        <img src="uploads/team-3.jpg" alt="" />
-                    </div>
-                    <div class="text">
-                        <h2><a href="team-member.html">Peter Smith</a></h2>
-                        <div class="designation">CTO</div>
-                        <div class="social">
-                            <ul>
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_50">
-                    <div class="photo">
-                        <img src="uploads/team-4.jpg" alt="" />
-                    </div>
-                    <div class="text">
-                        <h2><a href="team-member.html">Brent Grundy</a></h2>
-                        <div class="designation">Tour Manager</div>
-                        <div class="social">
-                            <ul>
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_50">
-                    <div class="photo">
-                        <img src="uploads/team-1.jpg" alt="" />
-                    </div>
-                    <div class="text">
-                        <h2><a href="team-member.html">Pat Flynn</a></h2>
-                        <div class="designation">Organizer</div>
-                        <div class="social">
-                            <ul>
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_50">
-                    <div class="photo">
-                        <img src="uploads/team-2.jpg" alt="" />
-                    </div>
-                    <div class="text">
-                        <h2><a href="team-member.html">David Beckham</a></h2>
-                        <div class="designation">Volunteer</div>
-                        <div class="social">
-                            <ul>
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_50">
-                    <div class="photo">
-                        <img src="uploads/team-3.jpg" alt="" />
-                    </div>
-                    <div class="text">
-                        <h2><a href="team-member.html">Peter Smith</a></h2>
-                        <div class="designation">Organizer</div>
-                        <div class="social">
-                            <ul>
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_50">
-                    <div class="photo">
-                        <img src="uploads/team-4.jpg" alt="" />
-                    </div>
-                    <div class="text">
-                        <h2><a href="team-member.html">Brent Grundy</a></h2>
-                        <div class="designation">Organizer</div>
-                        <div class="social">
-                            <ul>
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
-
 @endsection

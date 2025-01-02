@@ -13,6 +13,7 @@ use App\Models\WelcomeItem;
 use App\Models\Feature;
 use App\Models\CounterItem;
 use App\Models\Testimonial;
+use App\Models\TeamMember;
 use Hash;
 
 
@@ -24,7 +25,6 @@ class FrontController extends Controller
         $welcome_item= WelcomeItem::where('id',1)->first();
         $features=Feature::get();
         $testimonials=Testimonial::get();
-
         return view("front.home",compact('sliders','welcome_item','features','testimonials'));
     }
     public function about(){
@@ -44,8 +44,16 @@ class FrontController extends Controller
         return view("front.faq");
     }
     public function team_members(){
-        return view("front.team_members");
+
+        $team_members=TeamMember::get();
+
+        return view("front.team_members",compact('team_members'));
     }
+    public function team_member_details($id){
+        $team_member=TeamMember::find($id);
+        return view("front.team_member_details",compact('team_member'));
+    }
+
     public function destinations(){
         return view("front.destinations");
     }
