@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminBlogCategoryController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminDestinationController;
+use App\Http\Controllers\Admin\AdminPackageController;
 
 
 
@@ -162,6 +163,14 @@ Route::middleware('admin')->prefix('admin')->group(function (){
     Route::post('/destination/video/edit/{id}',[AdminDestinationController::class,'destination_video_edit_submit'])->name('admin_destination_video_edit_submit');
     Route::get('/destination/videos/delete/{id}',[AdminDestinationController::class,'destination_video_delete'])->name('admin_destination_video_delete');
 
+    //Destination Packages
+    Route::get('/package/index',[AdminPackageController::class,'index'])->name('admin_packages_index');
+    Route::get('/package/create',[AdminPackageController::class,'create'])->name('admin_package_create');
+    Route::post('/package/create',[AdminPackageController::class,'create_submit'])->name('admin_package_create_submit');
+    Route::get('/package/edit/{id}',[AdminPackageController::class, 'edit'])->name('admin_package_edit');
+    Route::post('/package/edit/{id}',[AdminPackageController::class,'edit_submit'])->name('admin_package_edit_submit');
+    Route::get('/package/delete/{id}',[AdminPackageController::class, 'delete'])->name('admin_package_delete');
+    
 
 
 });

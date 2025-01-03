@@ -12,4 +12,7 @@ class Destination extends Model
     public function destination_videos(){
         return $this->hasMany('App\Models\DestinationVideo');
     }
+    public function packages(){
+        return $this->hasMany('App\Models\Package');
+    }
 }

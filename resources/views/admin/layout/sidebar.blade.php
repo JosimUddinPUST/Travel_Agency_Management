@@ -21,6 +21,7 @@
             <li class="{{ Request::is('admin/blog-category/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_blog_category_index') }}"><i class="fas fa-hand-point-right"></i><span>Blog Category</span></a></li>
             <li class="{{ Request::is('admin/post/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_post_index') }}"><i class="fas fa-hand-point-right"></i><span>Posts</span></a></li>
             <li class="{{ Request::is('admin/destination/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_destination_index') }}"><i class="fas fa-hand-point-right"></i><span>Destinations</span></a></li>
+            <li class="{{ Request::is('admin/package/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_packages_index') }}"><i class="fas fa-hand-point-right"></i><span>Packages</span></a></li>
 
             
             <li class="nav-item dropdown">
