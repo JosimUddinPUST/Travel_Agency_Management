@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminTeamMemberController;
 use App\Http\Controllers\Admin\AdminFaqController;
 use App\Http\Controllers\Admin\AdminBlogCategoryController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminDestinationController;
 
 
 
@@ -25,11 +26,16 @@ Route::get('/team-members',[FrontController::class,'team_members'])->name('team_
 Route::get('/team-member-details/{id}',[FrontController::class,'team_member_details'])->name('team_member_details');
 
 Route::get('/destinations',[FrontController::class,'destinations'])->name('destinations');
+Route::get('/destination-details/{slug}',[FrontController::class,'destination_details'])->name('destination_details');
 Route::get('/packages',[FrontController::class,'packages'])->name('packages');
 
 Route::get('/post-details/{slug}',[FrontController::class,'post_details'])->name('post_details');
 
 Route::get('/blog-category/{slug}',[FrontController::class,'blog_category'])->name('blog_category');
+
+
+
+
 
 Route::prefix('user')->group(function () {
     Route::get('/registration',[FrontController::class,'registration'])->name('user_registration');
@@ -132,7 +138,30 @@ Route::middleware('admin')->prefix('admin')->group(function (){
     Route::post('/post/edit/{id}',[AdminPostController::class,'edit_submit'])->name('admin_post_edit_submit');
     Route::get('/post/delete/{id}',[AdminPostController::class, 'delete'])->name('admin_post_delete');
 
+    //Destination
+    Route::get('/destination/index',[AdminDestinationController::class,'index'])->name('admin_destination_index');
+    Route::get('/destination/create',[AdminDestinationController::class,'create'])->name('admin_destination_create');
+    Route::post('/destination/create',[AdminDestinationController::class,'create_submit'])->name('admin_destination_create_submit');
+    Route::get('/destination/edit/{id}',[AdminDestinationController::class, 'edit'])->name('admin_destination_edit');
+    Route::post('/destination/edit/{id}',[AdminDestinationController::class,'edit_submit'])->name('admin_destination_edit_submit');
+    Route::get('/destination/delete/{id}',[AdminDestinationController::class, 'delete'])->name('admin_destination_delete');
     
+    //Destination Photos
+    Route::get('/destination/photos/index/{id}',[AdminDestinationController::class,'destination_photos_index'])->name('admin_destination_photos_index');
+    Route::get('/destination/photo/create/{id}',[AdminDestinationController::class,'destination_photo_create'])->name('admin_destination_photo_create');
+    Route::post('/destination/photo/create/{id}',[AdminDestinationController::class,'destination_photo_create_submit'])->name('admin_destination_photo_create_submit');
+    Route::get('/destination/photo/edit/{id}',[AdminDestinationController::class,'destination_photo_edit'])->name('admin_destination_photo_edit');
+    Route::post('/destination/photo/edit/{id}',[AdminDestinationController::class,'destination_photo_edit_submit'])->name('admin_destination_photo_edit_submit');
+    Route::get('/destination/photos/delete/{id}',[AdminDestinationController::class,'destination_photo_delete'])->name('admin_destination_photo_delete');
+
+    //Destination Videos
+    Route::get('/destination/videos/index/{id}',[AdminDestinationController::class,'destination_videos_index'])->name('admin_destination_videos_index');
+    Route::get('/destination/video/create/{id}',[AdminDestinationController::class,'destination_video_create'])->name('admin_destination_video_create');
+    Route::post('/destination/video/create/{id}',[AdminDestinationController::class,'destination_video_create_submit'])->name('admin_destination_video_create_submit');
+    Route::get('/destination/video/edit/{id}',[AdminDestinationController::class,'destination_video_edit'])->name('admin_destination_video_edit');
+    Route::post('/destination/video/edit/{id}',[AdminDestinationController::class,'destination_video_edit_submit'])->name('admin_destination_video_edit_submit');
+    Route::get('/destination/videos/delete/{id}',[AdminDestinationController::class,'destination_video_delete'])->name('admin_destination_video_delete');
+
 
 
 });

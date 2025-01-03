@@ -19,7 +19,9 @@ use App\Models\TeamMember;
 use App\Models\Faq;
 use App\Models\BlogCategory;
 use App\Models\Post;
-
+use App\Models\Destination;
+use App\Models\DestinationPhoto;
+use App\Models\DestinationVideo;
 
 class FrontController extends Controller
 {
@@ -29,7 +31,10 @@ class FrontController extends Controller
         $welcome_item= WelcomeItem::where('id',1)->first();
         $features=Feature::get();
         $testimonials=Testimonial::get();
-        return view("front.home",compact('sliders','welcome_item','features','testimonials'));
+        $popular_destinations=Destination::orderBy('view_count','desc')->get()->take(8);
+        $latest_posts=Post::with('blog_category')->orderBy('id','desc')->get()->take(3);
+
+        return view("front.home",compact('sliders','welcome_item','features','testimonials','popular_destinations','latest_posts'));
     }
     public function about(){
         $welcome_item= WelcomeItem::where('id',1)->first();
@@ -77,7 +82,16 @@ class FrontController extends Controller
     }
 
     public function destinations(){
-        return view("front.destinations");
+
+        $destinations=Destination::orderBy('id','desc')->paginate(4);
+        return view("front.destinations",compact('destinations'));
+    }
+    public function destination_details($slug){
+        $destination=Destination::where('slug',$slug)->first();
+        $destination_photos=DestinationPhoto::where('destination_id',$destination->id)->get();
+        $destination_videos=DestinationVideo::where('destination_id',$destination->id)->get();
+
+        return view("front.destination_details",compact('destination','destination_photos','destination_videos'));
     }
     public function packages(){
         return view("front.packages");

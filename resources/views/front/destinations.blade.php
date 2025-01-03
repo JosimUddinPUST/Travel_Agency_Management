@@ -19,129 +19,28 @@
 <div class="destination pt_70 pb_50">
     <div class="container">
         <div class="row">
+            @foreach($destinations as $destination)
             <div class="col-lg-3 col-md-6">
                 <div class="item pb_25">
                     <div class="photo">
-                        <a href="destination.html"><img src="uploads/destination-1.jpg" alt=""></a>
+                        <a href="{{route('destination_details',$destination->slug)}}"><img src="{{('uploads/'.$destination->featured_photo )}}" alt="No Image"></a>
                     </div>
                     <div class="text">
                         <h2>
-                            <a href="destination.html">Australia</a>
+                            <a href="{{route('destination_details',$destination->slug)}}">{{$destination->name}}</a>
                         </h2>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_25">
-                    <div class="photo">
-                        <a href="destination.html"><img src="uploads/destination-2.jpg" alt=""></a>
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="destination.html">Thailand</a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_25">
-                    <div class="photo">
-                        <a href="destination.html"><img src="uploads/destination-3.jpg" alt=""></a>
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="destination.html">Canada</a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_25">
-                    <div class="photo">
-                        <a href="destination.html"><img src="uploads/destination-4.jpg" alt=""></a>
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="destination.html">Dubai</a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_25">
-                    <div class="photo">
-                        <a href="destination.html"><img src="uploads/destination-5.jpg" alt=""></a>
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="destination.html">Portugal</a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_25">
-                    <div class="photo">
-                        <a href="destination.html"><img src="uploads/destination-6.jpg" alt=""></a>
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="destination.html">Morocco</a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_25">
-                    <div class="photo">
-                        <a href="destination.html"><img src="uploads/destination-7.jpg" alt=""></a>
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="destination.html">Venice</a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="item pb_25">
-                    <div class="photo">
-                        <a href="destination.html"><img src="uploads/destination-8.jpg" alt=""></a>
-                    </div>
-                    <div class="text">
-                        <h2>
-                            <a href="destination.html">Paris</a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="pagi">
-                    <nav>
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
-
-
+<div class="container pb_10">
+    <div class="row">
+        <div class="col-md-12 text-center d-flex justify-content-center">
+            {{$destinations->links()}}
+        </div>
+    </div>
+</div>
 @endsection
