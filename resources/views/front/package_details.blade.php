@@ -399,7 +399,11 @@
 
                             <div class="row">
                                 <div class="col-md-8">
-                                    <h2 class="mt_30">Booking Information</h2>
+                                    @foreach ($tours as $tour)
+                                    <h2 class="mt_30">
+                                        <input type="radio" name="tour_id" value="{{$tour->id}}" @if($loop->iteration==1) checked @endif>
+                                        Tour-{{$loop->iteration}} 
+                                    </h2>
                                     <div class="summary">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
@@ -408,21 +412,31 @@
                                                     <td>$400</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Start Date</b></td>
+                                                    <td><b> Tour Start Date</b></td>
                                                     <td>
-                                                        12 Jun, 2024
+                                                        {{$tour->tour_start_date}}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>End Date</b></td>
+                                                    <td><b>Tour End Date</b></td>
                                                     <td>
-                                                        28 Jun, 2024
+                                                        {{$tour->tour_end_date}}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>Total Seat</b></td>
+                                                    <td><b>Booking End Date</b></td>
+                                                    <td class="text-danger">
+                                                        {{$tour->booking_end_date}}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Total Seats</b></td>
                                                     <td>
-                                                        20
+                                                        @if($tour->total_seats==-1)
+                                                        Unlimited
+                                                        @else
+                                                        {{$tour->total_seats}}
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -440,7 +454,9 @@
                                             </table>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
+
                                 <div class="col-md-4">
                                     <h2 class="mt_30">Payment</h2>
                                     <div class="summary">
@@ -467,12 +483,19 @@
                                                             <option value="">Stripe</option>
                                                         </select>
                                                     </td>
-                                                </tr>
+                                                </tr>   
+
+                                                @if (Auth::guard('web')->check())
                                                 <tr>
                                                     <td>
                                                         <button type="submit" class="btn btn-primary">Pay Now</button>
                                                     </td>
                                                 </tr>
+                                                @else
+                                                <td>
+                                                    <a href="{{route('user_login')}}" class="btn btn-primary">Login to Book</a>
+                                                </td>
+                                                @endif
                                             </table>
                                         </div>
                                     </div>

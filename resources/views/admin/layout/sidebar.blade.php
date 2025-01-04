@@ -22,7 +22,8 @@
             <li class="{{ Request::is('admin/post/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_post_index') }}"><i class="fas fa-hand-point-right"></i><span>Posts</span></a></li>
             <li class="{{ Request::is('admin/destination/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_destination_index') }}"><i class="fas fa-hand-point-right"></i><span>Destinations</span></a></li>
             <li class="{{ Request::is('admin/package*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_packages_index') }}"><i class="fas fa-hand-point-right"></i><span>Packages</span></a></li>
-       
+            <li class="{{ Request::is('admin/tour*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin_tour_index') }}"><i class="fas fa-hand-point-right"></i><span>Tours</span></a></li>
+
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Dropdown Items</span></a>
                 <ul class="dropdown-menu">

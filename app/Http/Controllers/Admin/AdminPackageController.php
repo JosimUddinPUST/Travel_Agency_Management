@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Package;
 use App\Models\Destination;
 use App\Models\PackageFaq;
+use App\Models\Tour;
 
 class AdminPackageController extends Controller
 {
@@ -102,6 +103,15 @@ class AdminPackageController extends Controller
         if ($package->banner_photo != null) {
             unlink(public_path('uploads/' . $package->banner_photo));
         }
+        $total_faqs = PackageFaq::where('package_id', $id)->count();
+        if ($total_faqs > 0) {
+            return redirect()->back()->with('error', 'Please delete all FAQs first');
+        }
+        $tours = Tour::where('package_id', $id)->count();
+        if ($tours > 0) {
+            return redirect()->back()->with('error', 'Please delete all tours first');
+        }
+
         $package->delete();
         return redirect()->route('admin_packages_index')->with('success', 'Package Deleted Successfully');
     }

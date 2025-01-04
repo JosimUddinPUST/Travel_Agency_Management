@@ -12,4 +12,10 @@ class Package extends Model
     public function package_faqs(){
         return $this->hasMany('App\Models\PackageFaq');
     }
+    public function tours(){
+        return $this->hasMany('App\Models\Tour');
+    }
+    // public function bookings(){
+    //     return $this->hasMany('App\Models\Booking');
+    // }
 }

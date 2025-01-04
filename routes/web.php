@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminBlogCategoryController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\AdminTourController;
 
 
 
@@ -181,6 +182,16 @@ Route::middleware('admin')->prefix('admin')->group(function (){
     Route::get('/package-faq/edit/{id}',[AdminPackageController::class,'package_faq_edit'])->name('admin_package_faq_edit');
     Route::post('/package-faq/edit/{id}',[AdminPackageController::class,'package_faq_edit_submit'])->name('admin_package_faq_edit_submit');
     Route::get('/package-faq/delete/{id}',[AdminPackageController::class,'package_faq_delete'])->name('admin_package_faq_delete');
+
+    //Tour
+    Route::get('/tour/index',[AdminTourController::class,'index'])->name('admin_tour_index');
+    Route::get('/tour/create',[AdminTourController::class,'create'])->name('admin_tour_create');
+    Route::post('/tour/create',[AdminTourController::class,'create_submit'])->name('admin_tour_create_submit');
+    Route::get('/tour/edit/{id}',[AdminTourController::class, 'edit'])->name('admin_tour_edit');
+    Route::post('/tour/edit/{id}',[AdminTourController::class,'edit_submit'])->name('admin_tour_edit_submit');
+    Route::get('/tour/delete/{id}',[AdminTourController::class, 'delete'])->name('admin_tour_delete');
+    
+
 
 });
 //Admin

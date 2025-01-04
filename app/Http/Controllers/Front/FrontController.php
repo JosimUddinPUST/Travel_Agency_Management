@@ -25,6 +25,7 @@ use App\Models\DestinationPhoto;
 use App\Models\DestinationVideo;
 use App\Models\Package;
 use App\Models\PackageFaq;
+use App\Models\Tour;
 
 class FrontController extends Controller
 {
@@ -103,7 +104,10 @@ class FrontController extends Controller
     public function package_details($slug){
         $package=Package::where('slug',$slug)->first();
         $package_faqs=PackageFaq::where('package_id',$package->id)->get();
-        return view("front.package_details",compact('package','package_faqs'));
+        $tours=Tour::where('package_id',$package->id)->get();
+
+
+        return view("front.package_details",compact('package','package_faqs','tours'));
     }
 
     public function enquery_form_submit(Request $request,$id){
