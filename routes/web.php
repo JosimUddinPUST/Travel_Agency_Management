@@ -38,7 +38,10 @@ Route::get('/post-details/{slug}',[FrontController::class,'post_details'])->name
 
 Route::get('/blog-category/{slug}',[FrontController::class,'blog_category'])->name('blog_category');
 
-
+//Payment
+Route::post('payment',[FrontController::class, 'payment'])->name('payment');
+Route::get('stripe/success', [FrontController::class, 'stripe_success'])->name('stripe_success');
+Route::get('stripe/cancel', [FrontController::class, 'stripe_cancel'])->name('stripe_cancel');
 
 
 
@@ -190,7 +193,7 @@ Route::middleware('admin')->prefix('admin')->group(function (){
     Route::get('/tour/edit/{id}',[AdminTourController::class, 'edit'])->name('admin_tour_edit');
     Route::post('/tour/edit/{id}',[AdminTourController::class,'edit_submit'])->name('admin_tour_edit_submit');
     Route::get('/tour/delete/{id}',[AdminTourController::class, 'delete'])->name('admin_tour_delete');
-    
+
 
 
 });

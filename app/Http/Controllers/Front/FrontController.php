@@ -26,6 +26,7 @@ use App\Models\DestinationVideo;
 use App\Models\Package;
 use App\Models\PackageFaq;
 use App\Models\Tour;
+use App\Models\Booking;
 
 class FrontController extends Controller
 {
@@ -245,5 +246,83 @@ class FrontController extends Controller
         return redirect()->route('user_login')->with('success','Password reset successfully, plz login with new password.');
         
     }
+    // public function payment(Request $request){
+    //     dd($request->all());
+    // }
+    public function payment(Request $request){
+        $user_id= Auth::guard('web')->user()->id;
+        $package=Package::where('id',$request->package_id)->first();
+        $tour=Tour::find($request->tour_id);
+        $total_price= $request->total_person*$request->ticket_price;
+
+        $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+        $response= $stripe->checkout->sessions->create([
+            'payment_method_types' => ['card'],
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'usd',
+                        'product_data' => [
+                            'name' => $package->name,
+                        ],
+                        'unit_amount' => $request->ticket_price*100,
+                    ],
+                    'quantity' => $request->total_person,
+                ],
+            ],
+            'mode' => 'payment',
+            'success_url'=>route('stripe_success').'?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url'=>route('stripe_cancel'),
+        ]);
+        if(isset($response->id) && $response->id!=''){
+        session()->put('total_person',$request->total_person);
+        session()->put('tour_id',$request->tour_id);    
+        session()->put('package_id',$request->package_id);   
+        session()->put('user_id',$user_id); 
+        session()->put('paid_amount',$total_price);   
+        return redirect($response->url);
+        }
+        else{
+            return redirect()->route('stripe_cancel');
+        }
+    }
+
+    public function stripe_success(Request $request)
+    {
+        if(isset($request->session_id)) {
+
+            $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+            $response = $stripe->checkout->sessions->retrieve($request->session_id);
+            //dd($response);
+
+            $booking = new Booking();
+            $booking->tour_id=session()->get('tour_id');
+            $booking->package_id=session()->get('package_id');
+            $booking->total_person=session()->get('total_person');
+            $booking->user_id=session()->get('user_id');
+            $booking->paid_amount=session()->get('paid_amount');
+            $booking->payment_method='Stripe';
+            $booking->payment_status = $response->status;
+            $booking->invoice= 'INV-'.time();
+            $booking->save();
+
+            return redirect()->back()->with('success','Payment is successful');
+
+            unset($_SESSION['tour_id']);
+            unset($_SESSION['package_id']);
+            unset($_SESSION['total_person']);
+            unset($_SESSION['user_id']);
+            unset($_SESSION['paid_amount']);
+
+        } else {
+            return redirect()->route('stripe_cancel');
+        }
+    }
+
+    public function stripe_cancel()
+    {
+        return redirect()->back()->with('error','Payment is cancelled');
+    }
+
 
 }

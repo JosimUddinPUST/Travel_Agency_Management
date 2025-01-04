@@ -15,7 +15,7 @@ class Package extends Model
     public function tours(){
         return $this->hasMany('App\Models\Tour');
     }
-    // public function bookings(){
-    //     return $this->hasMany('App\Models\Booking');
-    // }
+    public function bookings(){
+        return $this->hasMany('App\Models\Booking');
+    }
 }

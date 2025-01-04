@@ -35,11 +35,11 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Tour End Date</label>
-                                        <input id="datepicker1" type="text" class="form-control" name="tour_end_date" value="{{ $tour->tour_end_date }}">
+                                        <input id="datepicker2" type="text" class="form-control" name="tour_end_date" value="{{ $tour->tour_end_date }}">
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Booking End Date</label>
-                                        <input id="datepicker1" type="text" class="form-control" name="booking_end_date" value="{{ $tour->booking_end_date }}">
+                                        <input id="datepicker3" type="text" class="form-control" name="booking_end_date" value="{{ $tour->booking_end_date }}">
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Total Seats</label>
