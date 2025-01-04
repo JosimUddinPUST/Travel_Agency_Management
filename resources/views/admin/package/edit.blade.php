@@ -23,12 +23,20 @@
                                     @csrf
                                     
                                     <div class="mb-3">
-                                        <label class="form-label">Exsiting Photo</label>
+                                        <label class="form-label">Exsiting Featured Photo</label>
                                         <div><img src="{{ asset('uploads/'.$package->featured_photo) }}" alt="No Photo Exist" class="w_200"></div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Featured Photo</label>
                                         <div><input type="file" name="featured_photo"></div>
+                                    </div> 
+                                    <div class="mb-3">
+                                        <label class="form-label">Exsiting Banner Photo</label>
+                                        <div><img src="{{ asset('uploads/'.$package->banner_photo) }}" alt="No Photo Exist" class="w_200"></div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Banner Photo</label>
+                                        <div><input type="file" name="banner_photo"></div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Package Name</label>

@@ -24,7 +24,7 @@
                         <li class="nav-item {{ Request::is('destinations') || Request::is('destination-details/*') ? 'active':'' }}">
                             <a href="{{ route('destinations') }}" class="nav-link">Destinations</a>
                         </li>
-                        <li class="nav-item {{ Request::is('packages') ? 'active':'' }}">
+                        <li class="nav-item {{ Request::is('package*') ? 'active':'' }}">
                             <a href="{{ route('packages') }}" class="nav-link">Packages</a>
                         </li>
                         <li class="nav-item {{ Request::is('team-members')? 'active':'' }}">

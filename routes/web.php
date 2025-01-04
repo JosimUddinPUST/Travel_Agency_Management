@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\AdminPackageController;
 
 
 
+//Front
 Route::get('/',[FrontController::class,'home'])->name('home');
 Route::get('/about',[FrontController::class,'about'])->name('about');
 Route::get('/blog',[FrontController::class,'blog'])->name('blog');
@@ -29,6 +30,8 @@ Route::get('/team-member-details/{id}',[FrontController::class,'team_member_deta
 Route::get('/destinations',[FrontController::class,'destinations'])->name('destinations');
 Route::get('/destination-details/{slug}',[FrontController::class,'destination_details'])->name('destination_details');
 Route::get('/packages',[FrontController::class,'packages'])->name('packages');
+Route::get('/package-details/{slug}',[FrontController::class,'package_details'])->name('package_details');
+Route::post('/enquiry/submit/{id}',[FrontController::class,'enquery_form_submit'])->name('enquery_form_submit');
 
 Route::get('/post-details/{slug}',[FrontController::class,'post_details'])->name('post_details');
 
@@ -170,8 +173,14 @@ Route::middleware('admin')->prefix('admin')->group(function (){
     Route::get('/package/edit/{id}',[AdminPackageController::class, 'edit'])->name('admin_package_edit');
     Route::post('/package/edit/{id}',[AdminPackageController::class,'edit_submit'])->name('admin_package_edit_submit');
     Route::get('/package/delete/{id}',[AdminPackageController::class, 'delete'])->name('admin_package_delete');
-    
 
+    //Package Faq
+    Route::get('/package-faq/index/{id}',[AdminPackageController::class,'package_faq_index'])->name('admin_package_faq_index');
+    Route::get('/package-faq/create/{id}',[AdminPackageController::class,'package_faq_create'])->name('admin_package_faq_create');
+    Route::post('/package-faq/create/{id}',[AdminPackageController::class,'package_faq_create_submit'])->name('admin_package_faq_create_submit');
+    Route::get('/package-faq/edit/{id}',[AdminPackageController::class,'package_faq_edit'])->name('admin_package_faq_edit');
+    Route::post('/package-faq/edit/{id}',[AdminPackageController::class,'package_faq_edit_submit'])->name('admin_package_faq_edit_submit');
+    Route::get('/package-faq/delete/{id}',[AdminPackageController::class,'package_faq_delete'])->name('admin_package_faq_delete');
 
 });
 //Admin

@@ -24,9 +24,10 @@
                                         <thead>
                                             <tr>
                                                 <th>SL</th>
-                                                <th>Photo</th>
+                                                <th>Featured Photo</th>
+                                                <th>Banner Photo</th>
                                                 <th>Package Name</th>
-                                                {{-- <th>Gallary</th> --}}
+                                                <th>Faqs</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -35,8 +36,12 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td><img src="{{ asset('uploads/'.$package->featured_photo)}}" class="w_100"></td>
+                                                <td><img src="{{ asset('uploads/'.$package->banner_photo)}}" class="w_100"></td>
                                                 <td>
                                                     {{ $package->name }}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('admin_package_faq_index',$package->id) }}" class="btn btn-success btn-sm">Faqs</a>
                                                 </td>
                                                 {{-- <td>
                                                     <a href="{{ route('admin_package_photos_index',$package->id) }}" class="btn btn-success btn-sm">Photo Gallary</a><br><br>

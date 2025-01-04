@@ -10,6 +10,7 @@ use App\Mail\Websitemail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Admin;
 use App\Models\Slider;
 use App\Models\WelcomeItem;
 use App\Models\Feature;
@@ -22,6 +23,8 @@ use App\Models\Post;
 use App\Models\Destination;
 use App\Models\DestinationPhoto;
 use App\Models\DestinationVideo;
+use App\Models\Package;
+use App\Models\PackageFaq;
 
 class FrontController extends Controller
 {
@@ -94,8 +97,41 @@ class FrontController extends Controller
         return view("front.destination_details",compact('destination','destination_photos','destination_videos'));
     }
     public function packages(){
-        return view("front.packages");
+        $packages=Package::orderBy('id','desc')->paginate(4);
+        return view("front.packages",compact('packages'));
     }
+    public function package_details($slug){
+        $package=Package::where('slug',$slug)->first();
+        $package_faqs=PackageFaq::where('package_id',$package->id)->get();
+        return view("front.package_details",compact('package','package_faqs'));
+    }
+
+    public function enquery_form_submit(Request $request,$id){
+        $package=Package::find($id);
+        $admin=Admin::where('id','1')->first();
+        $request->validate([
+            "name"=> "required",
+            "email"=> "required|email",
+            "phone"=> "required",
+            "message"=> "required",
+        ]);
+        $data=[
+            "name"=> $request->name,
+            "email"=> $request->email,
+            "phone"=> $request->phone,
+            "message"=> $request->message,
+        ];
+        $subject= 'Enquery Form for '.$package->name;
+        $message= 'Name: '.$data['name'].'<br>Email: '.$data['email'].'<br>Phone: '.$data['phone'].'<br>Message: '.$data['message'];
+
+        Mail::to($admin->email)->send(new Websitemail($subject, $message));
+
+        $message= 'Thank you for your enquery. We will contact you soon.';
+        Mail::to($data['email'])->send(new Websitemail($subject, $message));
+
+        return redirect()->back()->with('success','Your enquery is submitted successfully.');
+    }
+
     public function registration(){
         return view("front.registration");
     }
