@@ -53,7 +53,10 @@
                             
                             @if (Auth::guard('web')->check())
                             <li class="menu">
-                                <a href="{{ route('user_dashboard') }}"><i class="fas fa-sign-in-alt"></i> Dashboard</a>
+                                <a href="{{ route('user_dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                            </li>
+                             <li class="menu">
+                                <a href="{{ route('user_logout') }}"><i class="fas fa-sign-in-alt"></i> Logout</a>
                             </li>
                             @else 
                             <li class="menu">

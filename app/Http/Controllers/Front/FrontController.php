@@ -38,8 +38,9 @@ class FrontController extends Controller
         $testimonials=Testimonial::get();
         $popular_destinations=Destination::orderBy('view_count','desc')->get()->take(8);
         $latest_posts=Post::with('blog_category')->orderBy('id','desc')->get()->take(3);
+        $packages=Package::orderBy('id','desc')->get()->take(3);
 
-        return view("front.home",compact('sliders','welcome_item','features','testimonials','popular_destinations','latest_posts'));
+        return view("front.home",compact('sliders','welcome_item','features','testimonials','popular_destinations','latest_posts','packages'));
     }
     public function about(){
         $welcome_item= WelcomeItem::where('id',1)->first();
@@ -95,8 +96,9 @@ class FrontController extends Controller
         $destination=Destination::where('slug',$slug)->first();
         $destination_photos=DestinationPhoto::where('destination_id',$destination->id)->get();
         $destination_videos=DestinationVideo::where('destination_id',$destination->id)->get();
+        $packages=Package::orderBy('id','desc')->get()->take(3);
 
-        return view("front.destination_details",compact('destination','destination_photos','destination_videos'));
+        return view("front.destination_details",compact('destination','destination_photos','destination_videos','packages'));
     }
     public function packages(){
         $packages=Package::orderBy('id','desc')->paginate(4);
@@ -250,10 +252,33 @@ class FrontController extends Controller
     //     dd($request->all());
     // }
     public function payment(Request $request){
+
+        if(!$request->tour_id)
+        {
+            return redirect()->back()->with('error','Please select a tour first');
+        }
         $user_id= Auth::guard('web')->user()->id;
         $package=Package::where('id',$request->package_id)->first();
+
         $tour=Tour::find($request->tour_id);
         $total_price= $request->total_person*$request->ticket_price;
+
+        $tour_data=Tour::where('id',$request->tour_id)->first();
+        $total_allowed_seats=$tour_data->total_seats;
+        
+        if($total_allowed_seats!='-1'){
+            $total_booked_seats=0;
+            $all_data=Booking::where('tour_id',$request->tour_id)->where('package_id',$request->package_id)->get();
+            foreach($all_data as $data)
+            {
+                $total_booked_seats+=$data->total_person;
+            }
+            $remaning_seats=$total_allowed_seats - $total_booked_seats;
+            if($request->total_person>$remaning_seats)
+            {
+                return redirect()->back()->with('error', 'Sorry, only '.$remaning_seats.' seats are avaiable');
+            }
+        }
 
         $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
         $response= $stripe->checkout->sessions->create([

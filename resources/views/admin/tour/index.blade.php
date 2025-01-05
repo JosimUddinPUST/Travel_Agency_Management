@@ -29,6 +29,7 @@
                                                 <th>Tour End</th>
                                                 <th>Booking End</th>
                                                 <th>Total Seats</th>
+                                                <th>Booking</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -45,6 +46,9 @@
                                                 <td>{{ $tour->tour_end_date }}</td>
                                                 <td>{{ $tour->booking_end_date }}</td>
                                                 <td>{{ $tour->total_seats }}</td>
+                                                <td>
+                                                    <a href="{{route('admin_tour_booking',[$tour->id,$tour->package->id])}}" class="btn btn-success btn-sm">Booking Info</a>
+                                                </td>
                                                 <td class="pt_10 pb_10" style="width: 150px;">
                                                     <a href="{{ route('admin_tour_edit',$tour->id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                                     <a href="{{ route('admin_tour_delete',$tour->id) }}" class="btn btn-danger" onClick="return confirm('Are you sure?');"><i class="fas fa-trash"></i></a>

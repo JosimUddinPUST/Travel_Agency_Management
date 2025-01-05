@@ -401,13 +401,23 @@
                                 <input type="hidden" name="package_id" value="{{ $package->id }}">
                                 <div class="row">
                                     <div class="col-md-8">
+                                        @php $i=0; @endphp
                                         @foreach ($tours as $tour)
                                         @if($tour->booking_end_date < date('Y-m-d'))
                                             @continue
                                         @endif
+                                        @php 
+                                        $i++; 
+                                        $all_data=App\Models\Booking::where('tour_id',$tour->id)->where('package_id',$package->id)->get();
+                                        $total_booked_seats=0;
+                                        foreach($all_data as $data)
+                                        {
+                                            $total_booked_seats+=$data->total_person;
+                                        }
+                                        @endphp
                                         <h2 class="mt_30">
-                                            <input type="radio" name="tour_id" value="{{$tour->id}}" @if($loop->iteration==1) checked @endif>
-                                            Tour-{{$loop->iteration}} 
+                                            <input type="radio" name="tour_id" value="{{$tour->id}}" @if($i==1) checked @endif>
+                                            Tour-{{$i}} 
                                         </h2>
                                         <div class="summary">
                                                 <div class="table-responsive">
@@ -447,13 +457,19 @@
                                                         <tr>
                                                             <td><b>Booked Seat</b></td>
                                                             <td>
-                                                                15
+                                                                {{$total_booked_seats}}
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td><b>Available Seat</b></td>
+                                                            <td><b>Available Seats</b></td>
                                                             <td>
-                                                                5
+                                                                @if($tour->total_seats==-1)
+                                                                Unlimited
+                                                                @else
+                                                                {{
+                                                                    $tour->total_seats - $total_booked_seats
+                                                                }}
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -471,7 +487,7 @@
                                                         <td>
                                                             <input type="hidden" name="ticket_price" id="ticketPrice" value="{{$package->discounted_price}}">
                                                             <label for=""><b>Number of Persons</b></label>
-                                                            <input type="number" min="1" max="100" name="total_person" class="form-control" value="1" id="numPersons" oninput="calculateTotal()">
+                                                            <input type="number" min="1" max="1000" name="total_person" class="form-control" value="1" id="numPersons" oninput="calculateTotal()">
                                                         </td>
                                                     </tr>
                                                     <tr>

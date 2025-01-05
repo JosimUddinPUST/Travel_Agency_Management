@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tour;
 use App\Models\Package;
+use App\Models\Booking;
 
 class AdminTourController extends Controller
 {
@@ -58,5 +59,16 @@ class AdminTourController extends Controller
         $tour=Tour::find($id);
         $tour->delete();
         return redirect()->route('admin_tour_index')->with('success','Tour deleted successfully');
+    }
+    public function tour_booking($tour_id,$package_id){
+        // dd($tour_id,$package_id);
+        $all_data=Booking::with('user')->where('tour_id',$tour_id)->where('package_id',$package_id)->get();
+        return view('admin.tour.booking',compact('all_data'));
+
+    }
+    public function tour_booking_delete($id) {
+        $booking= Booking::where('id',$id)->first();
+        $booking->delete();
+        return redirect()->back()->with('success','Booking is deleted successfully.');
     }
 }
