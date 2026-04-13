@@ -1,34 +1,20 @@
 services:
   - type: web
-    name: tripsummit
-    env: docker
+    name: travelling-agency-management
+    runtime: docker
     plan: free
-    branch: main
 
-    dockerfilePath: ./Dockerfile
-
-    autoDeploy: true
-
-    envVars:
-      - key: APP_ENV
-        value: production
-      - key: APP_DEBUG
-        value: false
-      - key: APP_KEY
-        value: base64:bCEn9twCjdVnTnHbQMeM
-
-      - key: APP_URL
-        value: https://travel-agency-management-mxne.onrender.com
-
-      - key: DB_CONNECTION
-        value: pgsql
-      - key: DB_HOST
-        value: dpg-d7egctvaqgkc7380eu60-a
-      - key: DB_PORT
-        value: 5432
-      - key: DB_DATABASE
-        value: travelling_database
-      - key: DB_USERNAME
-        value: travelling_database_user
-      - key: DB_PASSWORD
-        value: 3qvZtpB7o2Q5PjDzaJEnnZBzkd6JXreR
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan optimize:clear
+      php artisan config:clear
+      composer install --no-dev --optimize-autoloader
+      npm install
+      npm run build
+      php artisan config:cache
+      php artisan cache:clear
+      
+startCommand: >
+  php artisan migrate:install || true &&
+  php artisan migrate --force &&
+  php artisan serve --host 0.0.0.0 --port 10000
