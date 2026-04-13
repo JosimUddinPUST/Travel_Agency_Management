@@ -386,7 +386,7 @@ select {
 /* Home Slider */
 .slider .item {
     position:relative;
-    height:490px;
+    height:480px;
     transition: all 0.3s;
     background-size:100%  100%;
     background-repeat: no-repeat;

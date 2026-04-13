@@ -14,9 +14,9 @@
                             <div class="text-wrapper">
                                 <div class="text-content">
                                     <h2 style="color:red">{{$slider->heading}}</h2>
-                                    <p style="color: rgb(255, 255, 255)">
+                                    <h6 style="color: rgb(255, 255, 255)">
                                         {!!$slider->text!!}
-                                    </p>
+                                    </h6>
                                     <div class="button-style-1 mt_20">
                                         <a href="{{ route('packages') }}">{{$slider->button_text}}</a>
                                     </div>

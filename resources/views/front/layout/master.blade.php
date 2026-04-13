@@ -44,8 +44,21 @@
                 <div class="row">
                     <div class="col-md-6 left-side">
                         <ul>
-                            <li class="phone-text"><i class="fas fa-phone"></i> +880 1788-946696</li>
-                            <li class="email-text"><i class="fas fa-envelope"></i> josim.cse.pust@gmail.com</li>
+                            <li class="phone-text">
+                                <i class="fas fa-phone"></i> +880 1788-946696
+                            </li>
+                            <li class="email-text">
+                                <i class="fas fa-envelope"></i> 
+                                <a href="https://mail.google.com/mail/?view=cm&to=josim.cse.pust@gmail.com" target="_blank">
+                                    josim.cse.pust@gmail.com
+                                </a>
+                            </li>
+                            <li class="github-text">
+                                <i class="fab fa-github"></i>
+                                <a href="https://github.com/JosimUddinPUST" target="_blank">
+                                    www.github.com
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md-6 right-side">
