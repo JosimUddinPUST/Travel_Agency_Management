@@ -44,8 +44,8 @@
                 <div class="row">
                     <div class="col-md-6 left-side">
                         <ul>
-                            <li class="phone-text"><i class="fas fa-phone"></i> 111-222-3333</li>
-                            <li class="email-text"><i class="fas fa-envelope"></i> contact@example.com</li>
+                            <li class="phone-text"><i class="fas fa-phone"></i> +880 1788-946696</li>
+                            <li class="email-text"><i class="fas fa-envelope"></i> josim.cse.pust@gmail.com</li>
                         </ul>
                     </div>
                     <div class="col-md-6 right-side">
@@ -95,8 +95,8 @@
                             <h2 class="heading">Useful Links</h2>
                             <ul class="useful-links">
                                 <li><a href="{{ route('faq') }}"><i class="fas fa-angle-right"></i> FAQ</a></li>
-                                <li><a href="terms.html"><i class="fas fa-angle-right"></i> Terms of Use</a></li>
-                                <li><a href="privacy.html"><i class="fas fa-angle-right"></i> Privacy Policy</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Terms of Use</a></li>
+                                <li><a href="#"><i class="fas fa-angle-right"></i> Privacy Policy</a></li>
                                 <li><a href="{{ route('contact') }}"><i class="fas fa-angle-right"></i> Contact</a></li>
                             </ul>
                         </div>
@@ -117,20 +117,20 @@
                                 <div class="left">
                                     <i class="fas fa-phone"></i>
                                 </div>
-                                <div class="right">contact@example.com</div>
+                                <div class="right">josim.cse.pust@gmail.com</div>
                             </div>
                             <div class="list-item">
                                 <div class="left">
                                     <i class="fas fa-envelope"></i>
                                 </div>
-                                <div class="right">122-222-1212</div>
+                                <div class="right">+880 1788-946696</div>
                             </div>
                             <ul class="social">
-                                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                                <li><a href=""><i class="fab fa-youtube"></i></a></li>
-                                <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="https://www.facebook.com/Josim.CSE.PUST" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="https://youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/josimcsepust/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="https://instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                                 To get the latest news from our website, please
                                 subscribe us here:
                             </p>
-                            <form action="" method="post">
+                            <form action="{{route('home')}}" method="">
                                 <div class="form-group">
                                     <input type="text" name="" class="form-control" placeholder="Email Address">
                                 </div>
@@ -161,7 +161,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="copyright">
-                            Copyright &copy; 2025, TripSummit. All Rights Reserved.
+                            Copyright &copy; 2026, TripSummit. All Rights Reserved.
                         </div>
                     </div>
                 </div>

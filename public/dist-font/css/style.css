@@ -385,20 +385,21 @@ select {
 
 /* Home Slider */
 .slider .item {
-    position: relative;
-    height: 620px;
-    transition: all 0.5s;
+    position:relative;
+    height:490px;
+    transition: all 0.3s;
+    background-size:100%  100%;
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
-}
+    background-position: center;
+} 
+
 .slider .item .bg {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
-	opacity: 0;
+	width:100%;
+	height:100%;
+	opacity:0;
 	background: #454545;
 }
 .slider .text {

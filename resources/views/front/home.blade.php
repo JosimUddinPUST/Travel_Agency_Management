@@ -13,12 +13,12 @@
                         <div class="col-lg-6">
                             <div class="text-wrapper">
                                 <div class="text-content">
-                                    <h2>{{$slider->heading}}</h2>
-                                    <p>
+                                    <h2 style="color:red">{{$slider->heading}}</h2>
+                                    <p style="color: rgb(255, 255, 255)">
                                         {!!$slider->text!!}
                                     </p>
                                     <div class="button-style-1 mt_20">
-                                        <a href="{{$slider->button_link}}">{{$slider->button_text}}</a>
+                                        <a href="{{ route('packages') }}">{{$slider->button_text}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                     <h3>{{$welcome_item->heading}}</h3>
                                     <p> {!!$welcome_item->text!!} </p>
                                     <div class="button-style-1 mt_20">
-                                        <a href="{{$welcome_item->button_link}}">{{$welcome_item->button_text}}</a>
+                                        <a href="{{ route('packages') }}">{{$welcome_item->button_text}}</a>
                                     </div>
                                 </div>
                             </div>
