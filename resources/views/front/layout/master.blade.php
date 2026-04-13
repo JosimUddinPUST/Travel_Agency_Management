@@ -42,7 +42,7 @@
         <div class="top">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 left-side">
+                    <div class="col-md-8 left-side">
                         <ul>
                             <li class="phone-text">
                                 <i class="fas fa-phone"></i> +880 1788-946696
@@ -61,7 +61,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-6 right-side">
+                    <div class="col-md-4 right-side">
                         <ul class="right">
                             
                             @if (Auth::guard('web')->check())
