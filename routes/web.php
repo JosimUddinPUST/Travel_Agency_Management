@@ -218,33 +218,3 @@ Route::prefix('admin')->group(function (){
     Route::post('/reset-password/{token}/{email}',[AdminAuthController::class,'reset_password_submit'])->name('admin_reset_password_submit');
 
 });
-
-
-
-Route::get('/debug-db', function () {
-    return DB::select('SELECT table_name FROM information_schema.tables WHERE table_schema = \'public\'');
-});
-
-Route::get('/debug-migrate', function () {
-    Artisan::call('migrate:status');
-    return Artisan::output();
-});
-
-Route::get('/force-migrate', function () {
-    Artisan::call('migrate:install');
-    Artisan::call('migrate', ['--force' => true]);
-
-    return nl2br(Artisan::output());
-});
-Route::get('/seed', function () {
-    Artisan::call('db:seed', ['--force' => true]);
-    return Artisan::output();
-});
-
-Route::get('/debug-build', function () {
-    return file_exists(public_path('build/manifest.json')) 
-        ? 'BUILD EXISTS' 
-        : 'BUILD MISSING';
-        
-});
-
